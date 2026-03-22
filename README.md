@@ -1,11 +1,143 @@
-# 📦 Gestão de Estoque para Mini Mercados
+<h1 align="center"; style="font-weight: bold;">Market Stock</h1>
 
-## 📌 Objetivo
-Desenvolver um sistema para gestão de estoque e vendas de mini mercados, garantindo segurança, controle de acesso e gestão eficiente de produtos e vendas.
+<h3 align="center"><img  alt="Faculdade Impacta" width = "400px" src="https://www.impacta.edu.br/themes/wc_agenciar3/images/logo-new.png"></h3>
 
----
+<p>
+    <img src="https://img.shields.io/badge/Status-Inicio_Desenvolvimento-yellow" alt="Status = Inicio Desenvolvimento">
+    <img src="https://img.shields.io/badge/Documentação-Em_Andamento-yellow" alt="Documentação: Em Andamento">
+    <img src="https://img.shields.io/badge/License-MIT-blue" alt="License = MIT">
+</p>
 
-## 🚀 Funcionalidades Principais
+<br>
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+<br>
+
+<h1 align="center"; style="font-weight: bold;">Market Stock</h1>
+
+<p align="center">
+    <a href="#sobre">Sobre</a> • 
+    <a href="#grupo">Integrantes do Grupo</a> •
+    <a href="#requisitos">Requisitos</a> •
+    <a href="#arquitetura">Arquitetura</a> •
+    <a href="#how-it-works">Funcionalidades</a> •
+    <a href="#interface">Interface</a> •
+    <a href="#endpoints">Endpoints da API</a> •
+    <a href="#licença">Licença</a>
+</p>
+
+<h2 id="sobre">📖 Sobre</h2>
+Projeto da Disciplina de Frameworks Full Stack, ministrada pelo professor Carlos Rafael Magalhães Fernandes  na Faculdade Impacta, durante o quarto semestre do curso Análise e Desenvolvimento de Sistemas cursado no 1º Semestre de 2026.
+
+Essa aplicação consiste num sistema para gestão de estoque e vendas de mini mercados, garantindo segurança, controle de acesso e gestão eficiente de produtos e vendas.
+
+<h2 id="grupo">👥 Integrantes do Grupo</h2>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/ivykkj.png" width="100" alt="Foto"/><br>
+      <b>Cauan de Melo Silva</b><br><br>
+        <a href="https://www.linkedin.com/in/cauan-de-melo-silva" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
+        <a href="https://github.com/ivykkj" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Isaacnasc.png" width="100" alt="Foto"/><br>
+      <b>Isaac do Nascimento Silva</b><br><br>
+        <a href="https://www.linkedin.com/in/isaac-nascimento-1925232a3/" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
+      <a href="https://github.com/Isaacnasc" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/vegacode03.png" width="100"  alt="Foto"/><br>
+      <b>Leonardo Borges Soares</b><br><br>
+      <a href="https://www.linkedin.com/in/leonardo-borges-ab2985137/" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
+      <a href="https://github.com/vegacode03" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/LucasAguiarN.png" width="100"  alt="Foto"/><br>
+      <b>Lucas Aguiar Nunes</b><br><br>
+      <a href="https://www.linkedin.com/in/lucas-aguiar-nunes" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
+      <a href="https://github.com/LucasAguiarN" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/rafaelferracinidev.png" width="100"  alt="Foto"/><br>
+      <b>Rafael Bela Ferracini</b><br><br>
+      <a href="https://www.linkedin.com/in/rafael-ferracini-b7b571143/" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
+      <a href="https://github.com/rafaelferracinidev" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
+    </td>
+  </tr>
+</table>
+
+<h2 id="requisitos">📦 Requisitos</h2>
+
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://https://docker.com/) <img src="https://img.shields.io/badge/python-3.8-blue" alt="Python = 3.8"><br>
+
+Tenha o Docker instalado caso queria rodar o projeto num container
+
+No diretório raiz do projeto, construa a imagem do container
+```bash
+docker build -t market-stock .
+```
+Execute o container
+```bash
+docker run --name market-stock-container -p 5000:5000 market-stock
+```
+
+Para rodar localmente sem ser via container tenha o Python instalado e no diretório raiz do projeto crie um ambiente virtual
+```bash
+python -m venv .venv
+```
+Ative o ambiente virtual no terminal<br>
+&emsp;&emsp;Sistema Windows
+```bash
+.venv\Scripts\activate.bat
+```
+&emsp;&emsp;Sistema Linux
+```bash
+source .venv/bin/activate
+```
+Execute o comando para instalar as bibliotecas<br>
+```bash
+pip install -r requirements.txt
+```
+
+<h2 id="arquitetura">🧩 Arquitetura do Sistema</h2>
+
+```
+📦 MarketStock
+├─ 🐳 Dockerfile
+├─ 📖 README.md
+├─ 📦 requirements.txt
+├─ 🚀 run.py
+├─ 🚫 .gitignore
+├─ ⚖️ LICENSE
+└─ 📂 src
+   ├─ 🧠 Application
+   │  ├─ 🎮 Controllers
+   │  │  ├─ 📄 seller_controller.py
+   │  │  └─ 📄 user_controller.py
+   │  └─ ⚙️ Service
+   │     ├─ 📄 seller_service.py
+   │     └─ 📄 user_service.py
+   ├─ ⚙️ config
+   │  └─ 📄 data_base.py
+   ├─ 🏛️ Domain
+   │  ├─ 📄 seller.py
+   │  └─ 📄 user.py
+   ├─ 🔌 Infrastructure
+   │  ├─ 🌐 http
+   │  │  └─ 📄 whats_app.py
+   │  └─ 🗄️ Model
+   │     ├─ 📄 seller.py
+   │     └─ 📄 user.py
+   └─ 🔀 routes.py
+```
+
+<h2 id="how-it-works">⚙️ Funcionalidades</h2>
 
 ### 1️⃣ Cadastro de Mini Mercado (Seller)
 Os mini mercados devem se cadastrar informando os seguintes campos:
@@ -61,119 +193,78 @@ Um seller autenticado pode:
 - Produtos inativados não podem ser vendidos.
 - Sellers inativos não podem realizar vendas.
 
----
-
-## 📡 Endpoints da API
-
-### 1️⃣ Cadastro e Ativação do Seller
-- **Criar Seller**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sellers" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Mini Mercado X", "cnpj": "00.000.000/0001-00", "email": "mercado@email.com", "celular": "+559999999999", "senha": "123456"}'
-  ```
-- **Ativar Seller via WhatsApp (Twilio)**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sellers/activate" \
-       -H "Content-Type: application/json" \
-       -d '{"celular": "+559999999999", "codigo": "1234"}'
-  ```
-
-### 2️⃣ Autenticação
-- **Login**
-  ```bash
-  curl -X POST "http://localhost:8080/api/auth/login" \
-       -H "Content-Type: application/json" \
-       -d '{"email": "mercado@email.com", "senha": "123456"}'
-  ```
-
-### 3️⃣ Gerenciamento de Produtos
-- **Cadastrar Produto**
-  ```bash
-  curl -X POST "http://localhost:8080/api/products" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz", "preco": 10.50, "quantidade": 100, "status": "Ativo", "img": "url_da_imagem"}'
-  ```
-- **Listar Produtos**
-  ```bash
-  curl -X GET "http://localhost:8080/api/products" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-- **Editar Produto**
-  ```bash
-  curl -X PUT "http://localhost:8080/api/products/1" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz Integral", "preco": 12.00, "quantidade": 50, "status": "Ativo"}'
-  ```
-- **Ver Detalhes de um Produto**
-  ```bash
-  curl -X GET "http://localhost:8080/api/products/1" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-- **Inativar Produto**
-  ```bash
-  curl -X PATCH "http://localhost:8080/api/products/1/inactivate" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-
-### 4️⃣ Realizar Venda
-- **Criar Venda**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sales" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"produtoId": 1, "quantidade": 2}'
-  ```
-
----
 
 ## 🛠️ Tecnologias Utilizadas
-- **Back-end:** Kotlin + Spring Boot
+- **Back-end:** Python + Flask
 - **Front-end:** React.js
-- **Banco de Dados:** MySQL ou PostgreSQL
+- **Banco de Dados:** SQLite
 - **Autenticação:** JWT ou OAuth
 - **Mensageria:** Twilio (para envio do código de ativação no WhatsApp)
-
----
 
 ## 📊 Dashboard e Relatórios
 - Implementação de um painel para exibição de relatórios e análise de vendas.
 - Monitoramento de estoque em tempo real.
 
----
+<h2 id="interface">🖥️ Interface</h2>
 
-## 📌 Considerações Finais
-Este projeto fornece um sistema completo para mini mercados gerenciarem seus estoques e vendas com segurança e eficiência. 🚀
+<h2 id="endpoints">🛠️ Endpoints da API</h2>
 
-
+Cadastro de Seller
+```bash
+  curl -X POST "http://localhost:5000/api/sellers" \
+       -H "Content-Type: application/json" \
+       -d '{"nome": "Mini Mercado X", "cnpj": "00.000.000/0001-00", "email": "mercado@email.com", "celular": "+559999999999", "senha": "123456"}'
 ```
-gest-stock
-├─ docker-compose.yml
-├─ Dockerfile
-├─ README.md
-├─ requirements.txt
-├─ run.py
-└─ src
-   ├─ Application
-   │  ├─ Controllers
-   │  │  ├─ seller_controller.py
-   │  │  └─ user_controller.py
-   │  └─ Service
-   │     ├─ seller_service.py
-   │     └─ user_service.py
-   ├─ config
-   │  └─ data_base.py
-   ├─ Domain
-   │  ├─ seller.py
-   │  └─ user.py
-   ├─ Infrastructure
-   │  ├─ http
-   │  │  └─ whats_app.py
-   │  └─ Model
-   │     ├─ seller.py
-   │     └─ user.py
-   └─ routes.py
-
+Ativação de Seller via WhatsApp
+```bash
+  curl -X POST "http://localhost:5000/api/sellers/activate" \
+       -H "Content-Type: application/json" \
+       -d '{"celular": "+559999999999", "codigo": "1234"}'
 ```
+Autentificação
+```bash
+  curl -X POST "http://localhost:5000/api/auth/login" \
+       -H "Content-Type: application/json" \
+       -d '{"email": "mercado@email.com", "senha": "123456"}'
+```
+### 3️⃣ Gerenciamento de Produtos
+Cadastro de Produto
+```bash
+  curl -X POST "http://localhost:5000/api/products" \
+       -H "Authorization: Bearer SEU_TOKEN" \
+       -H "Content-Type: application/json" \
+       -d '{"nome": "Arroz", "preco": 10.50, "quantidade": 100, "status": "Ativo", "img": "url_da_imagem"}'
+```
+Listar Produtos
+```bash
+  curl -X GET "http://localhost:5000/api/products" \
+       -H "Authorization: Bearer SEU_TOKEN"
+```
+Editar Produto
+```bash
+  curl -X PUT "http://localhost:5000/api/products/<int:produto_id>" \
+       -H "Authorization: Bearer SEU_TOKEN" \
+       -H "Content-Type: application/json" \
+       -d '{"nome": "Arroz Integral", "preco": 12.00, "quantidade": 50, "status": "Ativo"}'
+```
+Ver Detalhes Produto
+```bash
+  curl -X GET "http://localhost:5000/api/products/<int:produto_id>" \
+       -H "Authorization: Bearer SEU_TOKEN"
+```
+Inativar Produto
+```bash
+  curl -X PATCH "http://localhost:5000/api/products/<int:produto_id>/inactivate" \
+       -H "Authorization: Bearer SEU_TOKEN"
+```
+### 4️⃣ Realizar Venda
+Criar Venda
+```bash
+  curl -X POST "http://localhost:5000/api/sales" \
+       -H "Authorization: Bearer SEU_TOKEN" \
+       -H "Content-Type: application/json" \
+       -d '{"produtoId": 1, "quantidade": 2}'
+```
+
+<h2 id="licença">📜 Licença</h2>
+Este projeto é para fins educacionais e está disponível sob a <a href="./LICENSE">Licença MIT.</a>
