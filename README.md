@@ -106,6 +106,7 @@ pip install -r requirements.txt
 
 ```
 📦 MarketStock
+├─ 🐳docker-compose.yml
 ├─ 🐳 Dockerfile
 ├─ 📖 README.md
 ├─ 📦 requirements.txt
@@ -220,7 +221,7 @@ Ativação de Seller via WhatsApp
 ```
 Autentificação
 ```bash
-  curl -X POST "http://localhost:5000/api/auth/login" \
+  curl -X POST "http://localhost:5000/api/sellers/login" \
        -H "Content-Type: application/json" \
        -d '{"email": "mercado@email.com", "senha": "123456"}'
 ```
