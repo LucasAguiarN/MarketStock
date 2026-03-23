@@ -78,14 +78,11 @@ Essa aplicação consiste num sistema para gestão de estoque e vendas de mini m
 
 Tenha o Docker instalado caso queria rodar o projeto num container
 
-No diretório raiz do projeto, construa a imagem do container
+No diretório raiz do projeto, construa e execute o container
 ```bash
-docker build -t market-stock .
+docker-compose up --build
 ```
-Execute o container
-```bash
-docker run --name market-stock-container -p 5000:5000 market-stock
-```
+<br>
 
 Para rodar localmente sem ser via container tenha o Python instalado e no diretório raiz do projeto crie um ambiente virtual
 ```bash
