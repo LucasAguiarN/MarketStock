@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from src.config.data_base import init_db
 from src.routes import init_routes
 from dotenv import load_dotenv
+from flask_swagger_ui import get_swaggerui_blueprint 
 
 load_dotenv
 
@@ -21,6 +22,12 @@ def create_app():
     init_db(app)
 
     init_routes(app)
+    
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        '/docs',
+        '/static/swagger.yaml',
+    )
+    app.register_blueprint(swaggerui_blueprint)
 
     return app
 

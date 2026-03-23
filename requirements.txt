@@ -7,3 +7,4 @@ flask-jwt-extended
 bcrypt
 twilio
 python-dotenv
+flask-swagger-ui

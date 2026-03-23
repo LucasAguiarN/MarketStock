@@ -1,0 +1,351 @@
+openapi: 3.0.3
+info:
+  title: Gest-Stock API
+  description: API de gestão de estoque e mercado.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Servidor local de desenvolvimento
+
+tags:
+  - name: Health
+    description: Verificação de saúde da API
+  - name: Sellers
+    description: Operações relacionadas a vendedores
+
+paths:
+
+  /api:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      description: Verifica se a API está em execução.
+      responses:
+        '200':
+          description: API operacional
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+                    example: "API - OK; Docker - Up"
+
+  /api/sellers:
+    post:
+      tags:
+        - Sellers
+      summary: Cadastrar seller
+      description: Cria um novo seller com status inativo. Um código de ativação é enviado via WhatsApp.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nome
+                - cnpj
+                - email
+                - senha
+                - celular
+              properties:
+                nome:
+                  type: string
+                  example: "Empresa ABC"
+                cnpj:
+                  type: string
+                  example: "12345678000199"
+                email:
+                  type: string
+                  example: "contato@empresa.com"
+                senha:
+                  type: string
+                  example: "senhaSegura123"
+                celular:
+                  type: string
+                  example: "5511999999999"
+      responses:
+        '200':
+          description: Seller cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+                    example: "Seller salvo com sucesso"
+                  Seller:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "Empresa ABC"
+                      cnpj:
+                        type: string
+                        example: "12345678000199"
+                      email:
+                        type: string
+                        example: "contato@empresa.com"
+                      cellphone:
+                        type: string
+                        example: "5511999999999"
+                      status:
+                        type: string
+                        example: "inativo"
+        '400':
+          description: Campos obrigatórios ausentes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Missing required fields"
+
+  /api/sellers/login:
+    post:
+      tags:
+        - Sellers
+      summary: Login do seller
+      description: Autentica o seller e retorna um token JWT. O seller deve estar com status ativo.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - senha
+              properties:
+                email:
+                  type: string
+                  example: "contato@empresa.com"
+                senha:
+                  type: string
+                  example: "senhaSegura123"
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+                    example: "Login realizado com sucesso"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  seller:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "Empresa ABC"
+                      cnpj:
+                        type: string
+                        example: "12345678000199"
+                      email:
+                        type: string
+                        example: "contato@empresa.com"
+                      cellphone:
+                        type: string
+                        example: "5511999999999"
+                      status:
+                        type: string
+                        example: "ativo"
+        '400':
+          description: Email ou senha não informados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Email e senha são obrigatórios"
+        '401':
+          description: Credenciais inválidas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Email ou senha inválidos"
+        '403':
+          description: Conta ainda não ativada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Seller ainda não ativado"
+
+  /api/sellers/activate:
+    post:
+      tags:
+        - Sellers
+      summary: Ativar conta do seller
+      description: Ativa a conta usando o código de 4 dígitos recebido via WhatsApp.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - celular
+                - codigo
+              properties:
+                celular:
+                  type: string
+                  example: "5511999999999"
+                codigo:
+                  type: string
+                  example: "4827"
+      responses:
+        '200':
+          description: Conta ativada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+                    example: "conta ativada com sucesso!"
+                  seller:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "Empresa ABC"
+                      cnpj:
+                        type: string
+                        example: "12345678000199"
+                      email:
+                        type: string
+                        example: "contato@empresa.com"
+                      cellphone:
+                        type: string
+                        example: "5511999999999"
+                      status:
+                        type: string
+                        example: "ativo"
+        '400':
+          description: Dados ausentes ou código inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "celular e/ou código são obrigatórios"
+
+  /api/sellers/me:
+    put:
+      tags:
+        - Sellers
+      summary: Atualizar perfil do seller
+      description: Atualiza os dados do seller autenticado. Requer token JWT válido.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: "Empresa XYZ Atualizada"
+                email:
+                  type: string
+                  example: "novo@empresa.com"
+                celular:
+                  type: string
+                  example: "5511988888888"
+      responses:
+        '200':
+          description: Perfil atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+                    example: "perfil atualizado!"
+                  seller:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "Empresa XYZ Atualizada"
+                      cnpj:
+                        type: string
+                        example: "12345678000199"
+                      email:
+                        type: string
+                        example: "novo@empresa.com"
+                      cellphone:
+                        type: string
+                        example: "5511988888888"
+                      status:
+                        type: string
+                        example: "ativo"
+        '400':
+          description: Dados não fornecidos ou seller não encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Dados para atualização não fornecidos"
+        '401':
+          description: Token JWT ausente ou inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Missing Authorization Header"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token JWT obtido no endpoint de login
+
