@@ -108,6 +108,7 @@ pip install -r requirements.txt
 📦 MarketStock
 ├─ 🐳docker-compose.yml
 ├─ 🐳 Dockerfile
+├─ 🔑.env.example
 ├─ 📖 README.md
 ├─ 📦 requirements.txt
 ├─ 🚀 run.py
