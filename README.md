@@ -63,12 +63,6 @@ Essa aplicação consiste num sistema para gestão de estoque e vendas de mini m
       <a href="https://www.linkedin.com/in/lucas-aguiar-nunes" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
       <a href="https://github.com/LucasAguiarN" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
     </td>
-    <td align="center">
-      <img src="https://github.com/rafaelferracinidev.png" width="100"  alt="Foto"/><br>
-      <b>Rafael Bela Ferracini</b><br><br>
-      <a href="https://www.linkedin.com/in/rafael-ferracini-b7b571143/" target="_blank"><img title="Conecte-se" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Perfil Linkedin"/></a>
-      <a href="https://github.com/rafaelferracinidev" target="_blank"><img title="Siga-Me" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Perfil GitHub"/></a>
-    </td>
   </tr>
 </table>
 
@@ -225,6 +219,12 @@ Autentificação
   curl -X POST "http://localhost:5000/api/sellers/login" \
        -H "Content-Type: application/json" \
        -d '{"email": "mercado@email.com", "senha": "123456"}'
+```
+Atualização de Seller
+```bash
+  curl -X PUT "http://localhost:5000/api/sellers/me" \
+       -H "Content-Type: application/json" \
+       -d '{"nome": "Mini Mercado X", "email": "mercado@email.com", "celular": "+559999999999"}'
 ```
 ### 3️⃣ Gerenciamento de Produtos
 Cadastro de Produto
