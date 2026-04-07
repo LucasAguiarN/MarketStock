@@ -10,6 +10,8 @@ class Seller(db.Model):
     status = db.Column(db.String(20), default='inativo', nullable=False)
     activation_code = db.Column(db.String(10), nullable=True)
 
+    products = db.relationship('Product', back_populates='seller')
+
     def to_dict(self):
         return {
             "id": self.id,
