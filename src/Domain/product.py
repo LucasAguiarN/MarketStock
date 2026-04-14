@@ -1,5 +1,5 @@
 class ProductDomain():
-    def __init__(self, id, seller_id, name, quantity, image, status='INATIVO'):
+    def __init__(self, id, seller_id, name, quantity, image, status='ATIVO'):
         self.id = id
         self.name = name
         self.seller_id = seller_id

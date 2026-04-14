@@ -6,7 +6,7 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     image = db.Column(db.String(200), nullable=False)
-    status = db.Column(db.String(7), default='INATIVO', nullable=False)
+    status = db.Column(db.String(7), default='ATIVO', nullable=False)
 
     seller_id = db.Column(db.Integer, db.ForeignKey('sellers.id'), nullable=False)
     seller = db.relationship("Seller", back_populates="products")
