@@ -59,28 +59,23 @@ class ProductController:
         return make_response(jsonify({"Produtos": products}), 200)
 
     @staticmethod
-    def show_product():
+    def show_product(product_id):
         seller_logado = seller_logado()
 
         if not seller_logado:
             return make_response(jsonify({"erro": "Seller não autenticado"}), 404)
 
-        data = request.get_json()
-        product_id = data.get('id')
         product = ProductService.show_product(product_id)
         if not product:
             return make_response(jsonify({"erro": "Produto não encontrado"}), 404)
         return make_response(jsonify({"Produto": product}), 200)
         
     @staticmethod
-    def deactivate_product():
+    def deactivate_product(product_id):
         seller_logado = seller_logado()
 
         if not seller_logado:
             return make_response(jsonify({"erro": "Seller não autenticado"}), 404)
-        
-        data = request.get_json()
-        product_id = data.get('id')
 
         deactivate_product = ProductService.deactivate_product(product_id)
         if deactivate_product:

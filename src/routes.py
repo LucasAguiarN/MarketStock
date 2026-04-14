@@ -29,3 +29,23 @@ def init_routes(app):
     @app.route('/api/sellers/me', methods=['PUT'])
     def update_seller():
         return SellerController.update_seller()
+
+    @app.route('/api/products', methods=['POST'])
+    def register_product():
+        return ProductController.register_product()
+
+    @app.route('/api/products/{product_id}', methods=['PUT'])
+    def update_product():
+        return ProductController.update_product(product_id)
+
+    @app.route('/api/products', methods=['GET'])
+    def list_products():
+        return ProductController.list_products()
+
+    @app.route('/api/products/{product_id}', methods=['GET'])
+    def select_product():
+        return ProductController.select_product(product_id)
+
+    @app.route('/api/products/{product_id}/inactivate', methods=['GET'])
+    def deactivate_product():
+        return ProductController.deactivate_product(product_id)
