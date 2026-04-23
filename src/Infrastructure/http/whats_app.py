@@ -19,7 +19,7 @@ class WhatsAppService:
 
             message = self.client.messages.create(
                 body=message,
-                from_='whatsapp:+14155238886',  # número sandbox Twilio
+                from_='whatsapp:+14155238886',
                 to=f'whatsapp:{target_number}'
             )
             print("Mensagem enviada! SID:", message.sid)

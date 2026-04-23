@@ -1,5 +1,8 @@
 from src.Application.Controllers.user_controller import UserController
 from src.Application.Controllers.seller_controller import SellerController
+from src.Application.Controllers.product_controller import ProductController
+from src.Application.Controllers.sale_controller import SaleController
+from src.Application.Controllers.report_controller import ReportController
 from flask import jsonify, make_response
 
 def init_routes(app):    
@@ -35,17 +38,35 @@ def init_routes(app):
         return ProductController.register_product()
 
     @app.route('/api/products/{product_id}', methods=['PUT'])
-    def update_product():
+    def update_product(product_id):
         return ProductController.update_product(product_id)
 
     @app.route('/api/products', methods=['GET'])
     def list_products():
         return ProductController.list_products()
 
-    @app.route('/api/products/{product_id}', methods=['GET'])
-    def select_product():
-        return ProductController.select_product(product_id)
+    @app.route('/api/products/<int:product_id>', methods=['GET'])
+    def show_product(product_id): # Renomeado para corresponder ao método do controlador
+        return ProductController.show_product(product_id)
 
-    @app.route('/api/products/{product_id}/inactivate', methods=['GET'])
-    def deactivate_product():
+    @app.route('/api/products/<int:product_id>/inactivate', methods=['PATCH']) # Alterado para PATCH conforme README
+    def deactivate_product(product_id):
         return ProductController.deactivate_product(product_id)
+
+    # ROTAS DE VENDAS
+    @app.route('/api/sales', methods=['POST'])
+    def register_sale():
+        return SaleController.register_sale()
+
+    # ROTAS DE RELATÓRIOS
+    @app.route('/api/reports/sales-summary', methods=['GET'])
+    def get_sales_summary():
+        return ReportController.get_sales_summary()
+
+    @app.route('/api/reports/top-selling-products', methods=['GET'])
+    def get_top_selling_products():
+        return ReportController.get_top_selling_products()
+
+    @app.route('/api/reports/low-stock-products', methods=['GET'])
+    def get_low_stock_products():
+        return ReportController.get_low_stock_products()

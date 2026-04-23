@@ -12,8 +12,14 @@ class SellerController:
         password = data.get('senha')
         cellphone = data.get('celular')
 
-        if not name or not cnpj or not email or not password or not cellphone:
-            return make_response(jsonify({"erro": "Missing required fields"}), 400)
+        if not all([name, cnpj, email, password, cellphone]):
+            return make_response(jsonify({"erro": "Todos os campos são obrigatórios: nome, cnpj, email, senha, celular"}), 400)
+
+        if '@' not in email or '.' not in email.split('@')[-1]:
+            return make_response(jsonify({"erro": "Formato de e-mail inválido."}), 400)
+
+        if len(password) < 6:
+            return make_response(jsonify({"erro": "A senha deve ter no mínimo 6 caracteres."}), 400)
 
         seller = SellerService.create_seller(name, cnpj, email, password, cellphone)
         return make_response(jsonify({

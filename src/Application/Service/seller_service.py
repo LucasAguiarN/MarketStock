@@ -10,10 +10,8 @@ class SellerService:
     @staticmethod
     def create_seller(name, cnpj, email, password, cellphone):
 
-        #criptogradar senha    
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        #gerar código de ativação
         activation_code = str(random.randint(1000,9999))
 
         seller = Seller(name=name, cnpj=cnpj, email=email, password=hashed_password.decode('utf-8'), cellphone=cellphone, status='inativo', activation_code=activation_code)

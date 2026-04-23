@@ -12,52 +12,68 @@ class ProductService:
         return ProductDomain(id=product.id, name=product.name, price=product.price, quantity=product.quantity, image=product.image, seller_id=product.seller_id, status=product.status)
 
     @staticmethod
-    def update_product(product_id, data):
-        product = Product.query.get(product_id)
+    def update_product(product_id, data, seller_id):
+        product = Product.query.filter_by(id=product_id, seller_id=seller_id).first()
 
         if not product:
             return None
 
-        product.name = data.get('nome', seller.name)
-        product.price = data.get('preco', seller.price)
-        product.quantity = data.get('quantidade', seller.quantity)
-        product.image = data.get('imagem', seller.image)
+        product.name = data.get('nome', product.name)
+        product.price = data.get('preco', product.price)
+        product.quantity = data.get('quantidade', product.quantity)
+        product.image = data.get('imagem', product.image)
         db.session.commit()
 
         return ProductDomain(
-            product.id, 
-            product.name,
-            product.seller_id, 
-            product.price, 
-            product.quantity, 
-            product.image,  
-            product.status
+            id=product.id,
+            name=product.name,
+            price=product.price,
+            quantity=product.quantity,
+            image=product.image,
+            seller_id=product.seller_id,
+            status=product.status
         )
 
     @staticmethod
-    def select_all_products():
-        products = Product.query.all()
+    def select_all_products(seller_id):
+        products = Product.query.filter_by(seller_id=seller_id).all()
 
         if not products:
-            return None
+            return []
 
         lista = []
         for product in products:
-            lista.append(product.to_dict())
+            lista.append(ProductDomain(
+                id=product.id,
+                name=product.name,
+                price=product.price,
+                quantity=product.quantity,
+                image=product.image,
+                seller_id=product.seller_id,
+                status=product.status
+            ))
         return lista
 
     @staticmethod
-    def show_product(product_id):
-        product = Product.query.get(product_id)
+    def show_product(product_id, seller_id):
+        product = Product.query.filter_by(id=product_id, seller_id=seller_id).first()
 
         if not product:
             return None
         
-        return product.to_dict()
+        return ProductDomain(
+            id=product.id,
+            name=product.name,
+            price=product.price,
+            quantity=product.quantity,
+            image=product.image,
+            seller_id=product.seller_id,
+            status=product.status
+        )
 
     @staticmethod
-    def deactivate_product(product_id):
-        product = Product.query.get(product_id)
+    def deactivate_product(product_id, seller_id):
+        product = Product.query.filter_by(id=product_id, seller_id=seller_id).first()
 
         if not product:
             return None
@@ -66,11 +82,11 @@ class ProductService:
         db.session.commit()
 
         return ProductDomain(
-            product.id, 
-            product.name,
-            product.seller_id, 
-            product.price, 
-            product.quantity, 
-            product.image,  
-            product.status
+            id=product.id,
+            name=product.name,
+            price=product.price,
+            quantity=product.quantity,
+            image=product.image,
+            seller_id=product.seller_id,
+            status=product.status
         )

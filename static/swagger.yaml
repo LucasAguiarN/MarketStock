@@ -13,6 +13,12 @@ tags:
     description: Verificação de saúde da API
   - name: Sellers
     description: Operações relacionadas a vendedores
+  - name: Products
+    description: Operações relacionadas a produtos
+  - name: Sales
+    description: Operações de vendas
+  - name: Reports
+    description: Endpoints para relatórios e dashboard
 
 paths:
 
@@ -340,6 +346,326 @@ paths:
                   msg:
                     type: string
                     example: "Missing Authorization Header"
+  
+  /api/products:
+    post:
+      tags:
+        - Products
+      summary: Cadastrar produto
+      description: Cria um novo produto associado ao seller autenticado. Requer token JWT.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nome
+                - preco
+                - quantidade
+                - imagem
+              properties:
+                nome:
+                  type: string
+                  example: "Arroz Tipo 1"
+                preco:
+                  type: number
+                  format: float
+                  example: 25.50
+                quantidade:
+                  type: integer
+                  example: 100
+                imagem:
+                  type: string
+                  example: "http://example.com/imagem.jpg"
+      responses:
+        '200':
+          description: Produto cadastrado com sucesso
+        '400':
+          description: Campos obrigatórios ausentes
+        '401':
+          description: Não autorizado (token inválido ou ausente)
+    get:
+      tags:
+        - Products
+      summary: Listar produtos do seller
+      description: Retorna a lista de todos os produtos pertencentes ao seller autenticado. Requer token JWT.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de produtos retornada com sucesso
+        '401':
+          description: Não autorizado (token inválido ou ausente)
+        '404':
+          description: Nenhum produto encontrado
+
+  /api/products/{product_id}:
+    get:
+      tags:
+        - Products
+      summary: Ver detalhes de um produto
+      description: Retorna os detalhes de um produto específico, se ele pertencer ao seller autenticado. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: integer
+          description: ID do produto a ser visualizado.
+      responses:
+        '200':
+          description: Detalhes do produto.
+        '401':
+          description: Não autorizado.
+        '404':
+          description: Produto não encontrado ou não pertence a este seller.
+    put:
+      tags:
+        - Products
+      summary: Atualizar um produto
+      description: Atualiza os dados de um produto específico, se ele pertencer ao seller autenticado. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: integer
+          description: ID do produto a ser atualizado.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: "Arroz Integral"
+                preco:
+                  type: number
+                  format: float
+                  example: 28.00
+                quantidade:
+                  type: integer
+                  example: 90
+                imagem:
+                  type: string
+                  example: "http://example.com/nova_imagem.jpg"
+      responses:
+        '200':
+          description: Produto atualizado com sucesso.
+        '400':
+          description: Dados para atualização não fornecidos ou produto não encontrado/pertence a outro seller.
+        '401':
+          description: Não autorizado.
+
+  /api/products/{product_id}/inactivate:
+    patch:
+      tags:
+        - Products
+      summary: Inativar um produto
+      description: Altera o status de um produto para "INATIVO". O produto não poderá mais ser vendido. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: integer
+          description: ID do produto a ser inativado.
+      responses:
+        '200':
+          description: Produto desativado com sucesso.
+        '400':
+          description: Produto não encontrado.
+        '401':
+          description: Não autorizado.
+
+  /api/sales:
+    post:
+      tags:
+        - Sales
+      summary: Registrar uma venda
+      description: Cria um novo registro de venda, validando o estoque e o status do produto. Requer token JWT.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - produtoId
+                - quantidade
+              properties:
+                produtoId:
+                  type: integer
+                  example: 1
+                quantidade:
+                  type: integer
+                  example: 2
+      responses:
+        '201':
+          description: Venda registrada com sucesso.
+        '400':
+          description: Erro de validação (ex: estoque insuficiente, produto inativo, dados ausentes).
+        '401':
+          description: Não autorizado.
+        '404':
+          description: Produto não encontrado ou não pertence a este vendedor.
+
+  /api/reports/sales-summary:
+    get:
+      tags:
+        - Reports
+      summary: Obter resumo de vendas
+      description: Retorna o valor total e a quantidade de itens vendidos para o seller autenticado em um determinado período. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: period
+          schema:
+            type: string
+            enum: [today, week, month]
+            default: month
+          description: O período para o resumo (hoje, semana, mês).
+      responses:
+        '200':
+          description: Resumo de vendas retornado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_type:
+                    type: string
+                    example: "sales_summary"
+                  period:
+                    type: string
+                    example: "month"
+                  data:
+                    type: object
+                    properties:
+                      total_revenue:
+                        type: number
+                        format: float
+                        example: 1570.50
+                      total_items_sold:
+                        type: integer
+                        example: 89
+        '400':
+          description: Período inválido.
+        '401':
+          description: Não autorizado.
+
+  /api/reports/top-selling-products:
+    get:
+      tags:
+        - Reports
+      summary: Obter produtos mais vendidos
+      description: Retorna uma lista dos produtos mais vendidos do seller autenticado. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 5
+          description: O número de produtos a serem retornados no ranking.
+      responses:
+        '200':
+          description: Lista de produtos mais vendidos retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_type:
+                    type: string
+                    example: "top_selling_products"
+                  limit:
+                    type: integer
+                    example: 5
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        product_id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Arroz Tipo 1"
+                        image:
+                          type: string
+                          example: "http://example.com/imagem.jpg"
+                        total_sold:
+                          type: integer
+                          example: 50
+        '400':
+          description: Parâmetro 'limit' inválido.
+        '401':
+          description: Não autorizado.
+
+  /api/reports/low-stock-products:
+    get:
+      tags:
+        - Reports
+      summary: Obter produtos com estoque baixo
+      description: Retorna uma lista de produtos do seller autenticado cujo estoque está abaixo de um determinado limite. Requer token JWT.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: threshold
+          schema:
+            type: integer
+            default: 10
+          description: O limite de estoque para o alerta.
+      responses:
+        '200':
+          description: Lista de produtos com estoque baixo retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_type:
+                    type: string
+                    example: "low_stock_products"
+                  threshold:
+                    type: integer
+                    example: 10
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        product_id:
+                          type: integer
+                          example: 2
+                        name:
+                          type: string
+                          example: "Feijão Carioca"
+                        current_quantity:
+                          type: integer
+                          example: 8
+        '400':
+          description: Parâmetro 'threshold' inválido.
+        '401':
+          description: Não autorizado.
 
 components:
   securitySchemes:
@@ -348,4 +674,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: Token JWT obtido no endpoint de login
-
