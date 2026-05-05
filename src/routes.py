@@ -37,7 +37,7 @@ def init_routes(app):
     def register_product():
         return ProductController.register_product()
 
-    @app.route('/api/products/{product_id}', methods=['PUT'])
+    @app.route('/api/products/<int:product_id>', methods=['PUT'])
     def update_product(product_id):
         return ProductController.update_product(product_id)
 
