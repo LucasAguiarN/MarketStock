@@ -1,7 +1,8 @@
 class ProductDomain():
-    def __init__(self, id, seller_id, name, quantity, image, status='ATIVO'):
+    def __init__(self, id, seller_id, name, price, quantity, image, status='ATIVO'):
         self.id = id
         self.name = name
+        self.price = name
         self.seller_id = seller_id
         self.quantity = quantity
         self.image = image
@@ -10,7 +11,7 @@ class ProductDomain():
     def to_dict(self):
         return {
             "id": self.id,
-            "seller_id": self.seller_id,"
+            "seller_id": self.seller_id,
             "name": self.name,
             "price": self.price,
             "quantity": self.quantity,
