@@ -517,7 +517,7 @@ paths:
         '201':
           description: Venda registrada com sucesso.
         '400':
-          description: Erro de validação (ex: estoque insuficiente, produto inativo, dados ausentes).
+          description: "Erro de validação (ex: estoque insuficiente, produto inativo, dados ausentes)."
         '401':
           description: Não autorizado.
         '404':
