@@ -206,13 +206,13 @@ Cadastro de Seller
 ```bash
   curl -X POST "http://localhost:5000/api/sellers" \
        -H "Content-Type: application/json" \
-       -d '{"nome": "Mini Mercado X", "cnpj": "00.000.000/0001-00", "email": "mercado@email.com", "celular": "+559999999999", "senha": "123456"}'
+       -d '{"nome": "Mini Mercado X", "cnpj": "00.000.000/0001-00", "email": "mercado@email.com", "celular": "559999999999", "senha": "123456"}'
 ```
 Ativação de Seller via WhatsApp
 ```bash
   curl -X POST "http://localhost:5000/api/sellers/activate" \
        -H "Content-Type: application/json" \
-       -d '{"celular": "+559999999999", "codigo": "1234"}'
+       -d '{"celular": "559999999999", "codigo": "1234"}'
 ```
 Autentificação
 ```bash
@@ -224,7 +224,7 @@ Atualização de Seller
 ```bash
   curl -X PUT "http://localhost:5000/api/sellers/me" \
        -H "Content-Type: application/json" \
-       -d '{"nome": "Mini Mercado X", "email": "mercado@email.com", "celular": "+559999999999"}'
+       -d '{"nome": "Mini Mercado X", "email": "mercado@email.com", "celular": "559999999999"}'
 ```
 ### 3️⃣ Gerenciamento de Produtos
 Cadastro de Produto
@@ -232,7 +232,7 @@ Cadastro de Produto
   curl -X POST "http://localhost:5000/api/products" \
        -H "Authorization: Bearer SEU_TOKEN" \
        -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz", "preco": 10.50, "quantidade": 100, "status": "Ativo", "img": "url_da_imagem"}'
+       -d '{"nome": "Arroz", "preco": 10.50, "quantidade": 100, "imagem": "url_da_imagem"}'
 ```
 Listar Produtos
 ```bash
