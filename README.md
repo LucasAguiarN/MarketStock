@@ -244,7 +244,7 @@ Editar Produto
   curl -X PUT "http://localhost:5000/api/products/<int:produto_id>" \
        -H "Authorization: Bearer SEU_TOKEN" \
        -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz Integral", "preco": 12.00, "quantidade": 50, "status": "Ativo"}'
+       -d '{"nome": "Arroz Integral", "preco": 12.00, "quantidade": 50}'
 ```
 Ver Detalhes Produto
 ```bash
