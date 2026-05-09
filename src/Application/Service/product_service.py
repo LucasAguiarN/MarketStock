@@ -76,17 +76,22 @@ class ProductService:
         product = Product.query.filter_by(id=product_id, seller_id=seller_id).first()
 
         if not product:
-            return None
+            return None, False
 
-        product.status = "INATIVO"
-        db.session.commit()
-
-        return ProductDomain(
+        if product.status == "ATIVO":
+            status_disabled = False
+            product.status = "INATIVO"
+            db.session.commit()
+        else:
+            status_disabled = True
+        
+        product_domain = ProductDomain(
             id=product.id,
             name=product.name,
             price=product.price,
             quantity=product.quantity,
             image=product.image,
             seller_id=product.seller_id,
-            status=product.status
+            status=product.status,
         )
+        return product_domain, status_disabled

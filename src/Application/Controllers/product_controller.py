@@ -72,8 +72,14 @@ class ProductController:
         seller_id = get_jwt_identity()
 
         deactivate_product = ProductService.deactivate_product(product_id, seller_id)
-        if deactivate_product:
-            return make_response(jsonify({
-                "mensagem": "Produto desativado com sucesso!"
-            }), 200)
-        return make_response(jsonify({"erro": "Não foi possível desativar o produto. Verifique se o produto existe e pertence a você."}), 404)
+        product, status_disabled = deactivate_product
+
+        if not product:
+            return make_response(jsonify({"erro": "Não foi possível desativar o produto. Verifique se o produto existe e pertence a você."}), 404)
+
+        if status_disabled:
+            return make_response(jsonify({"mensagem": "O produto já está inativo."}), 409)
+        
+        return make_response(jsonify({
+            "mensagem": "Produto desativado com sucesso!"
+        }), 200)
