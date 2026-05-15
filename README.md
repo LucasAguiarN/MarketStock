@@ -69,6 +69,9 @@ A interface deste projeto foi feita em React e se encontra no seguinte repositó
 
 <h2 id="requisitos">📦 Requisitos</h2>
 
+No diretório raiz do projeto, crie um arquivo `.env` com base no arquivo 
+<a href="./.env.example">`.env.example`</a>.
+
 [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://https://docker.com/) <img src="https://img.shields.io/badge/python-3.8-blue" alt="Python = 3.8"><br>
 
 Tenha o Docker instalado caso queria rodar o projeto num container
@@ -95,6 +98,10 @@ source .venv/bin/activate
 Execute o comando para instalar as bibliotecas<br>
 ```bash
 pip install -r requirements.txt
+```
+Execute o comando para iniciar o projeto<br>
+```bash
+python run.py
 ```
 
 <h2 id="arquitetura">🧩 Arquitetura do Sistema</h2>
