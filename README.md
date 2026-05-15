@@ -3,8 +3,8 @@
 <h3 align="center"><img  alt="Faculdade Impacta" width = "400px" src="https://www.impacta.edu.br/themes/wc_agenciar3/images/logo-new.png"></h3>
 
 <p>
-    <img src="https://img.shields.io/badge/Status-Inicio_Desenvolvimento-yellow" alt="Status = Inicio Desenvolvimento">
-    <img src="https://img.shields.io/badge/Documentação-Em_Andamento-yellow" alt="Documentação: Em Andamento">
+    <img src="https://img.shields.io/badge/Status-Concluído-brightgreen" alt="Status = Concluído">
+    <img src="https://img.shields.io/badge/Documentação-Completa-brightgreen" alt="Documentação: Completa">
     <img src="https://img.shields.io/badge/License-MIT-blue" alt="License = MIT">
 </p>
 
@@ -12,8 +12,8 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 <br>
@@ -26,7 +26,6 @@
     <a href="#requisitos">Requisitos</a> •
     <a href="#arquitetura">Arquitetura</a> •
     <a href="#how-it-works">Funcionalidades</a> •
-    <a href="#interface">Interface</a> •
     <a href="#endpoints">Endpoints da API</a> •
     <a href="#licença">Licença</a>
 </p>
@@ -35,6 +34,8 @@
 Projeto da Disciplina de Frameworks Full Stack, ministrada pelo professor Carlos Rafael Magalhães Fernandes  na Faculdade Impacta, durante o quarto semestre do curso Análise e Desenvolvimento de Sistemas cursado no 1º Semestre de 2026.
 
 Essa aplicação consiste num sistema para gestão de estoque e vendas de mini mercados, garantindo segurança, controle de acesso e gestão eficiente de produtos e vendas.
+
+A interface deste projeto foi feita em React e se encontra no seguinte repositório: <a href="https://github.com/vegacode03/MarketStock-Frontend">MarketStock-Frontend.</a>
 
 <h2 id="grupo">👥 Integrantes do Grupo</h2>
 <table align="center">
@@ -102,32 +103,49 @@ pip install -r requirements.txt
 📦 MarketStock
 ├─ 🐳docker-compose.yml
 ├─ 🐳 Dockerfile
+├─ 🔑.env
 ├─ 🔑.env.example
 ├─ 📖 README.md
 ├─ 📦 requirements.txt
 ├─ 🚀 run.py
+├─ 🗄️ market_management.db
 ├─ 🚫 .gitignore
 ├─ ⚖️ LICENSE
-└─ 📂 src
-   ├─ 🧠 Application
-   │  ├─ 🎮 Controllers
-   │  │  ├─ 📄 seller_controller.py
-   │  │  └─ 📄 user_controller.py
-   │  └─ ⚙️ Service
-   │     ├─ 📄 seller_service.py
-   │     └─ 📄 user_service.py
-   ├─ ⚙️ config
-   │  └─ 📄 data_base.py
-   ├─ 🏛️ Domain
-   │  ├─ 📄 seller.py
-   │  └─ 📄 user.py
-   ├─ 🔌 Infrastructure
-   │  ├─ 🌐 http
-   │  │  └─ 📄 whats_app.py
-   │  └─ 🗄️ Model
-   │     ├─ 📄 seller.py
-   │     └─ 📄 user.py
-   └─ 🔀 routes.py
+├─ 📂 src
+│  ├─ 🧠 Application
+│  │  ├─ 🎮 Controllers
+│  │  │  ├─ 📄 product_controller.py
+│  │  │  ├─ 📄 report_controller.py
+│  │  │  ├─ 📄 sale_controller.py
+│  │  │  ├─ 📄 seller_controller.py
+│  │  │  └─ 📄 user_controller.py
+│  │  └─ ⚙️ Service
+│  │     ├─ 📄 product_service.py
+│  │     ├─ 📄 report_service.py
+│  │     ├─ 📄 sale_service.py
+│  │     ├─ 📄 seller_service.py
+│  │     └─ 📄 user_service.py
+│  ├─ ⚙️ config
+│  │  └─ 📄 data_base.py
+│  ├─ 🏛️ Domain
+│  │  ├─ 📄 product.py
+│  │  ├─ 📄 report.py
+│  │  ├─ 📄 sale.py
+│  │  ├─ 📄 seller.py
+│  │  └─ 📄 user.py
+│  ├─ 🔌 Infrastructure
+│  │  ├─ 🌐 http
+│  │  │  └─ 📄 whats_app.py
+│  │  └─ 🗄️ Model
+│  │     ├─ 📄 product.py
+│  │     ├─ 📄 report.py
+│  │     ├─ 📄 sale.py
+│  │     ├─ 📄 seller.py
+│  │     └─ 📄 user.py
+│  └─ 🔀 routes.py
+└─ 📂 static
+│  ├─ 📘 Swagger.yaml
+│  └─ 📂 uploads
 ```
 
 <h2 id="how-it-works">⚙️ Funcionalidades</h2>
@@ -197,8 +215,6 @@ Um seller autenticado pode:
 ## 📊 Dashboard e Relatórios
 - Implementação de um painel para exibição de relatórios e análise de vendas.
 - Monitoramento de estoque em tempo real.
-
-<h2 id="interface">🖥️ Interface</h2>
 
 <h2 id="endpoints">🛠️ Endpoints da API</h2>
 
