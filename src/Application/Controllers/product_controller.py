@@ -1,6 +1,16 @@
+import os
+from uuid import uuid4
+from werkzeug.utils import secure_filename
 from flask import request, jsonify, make_response
 from src.Application.Service.product_service import ProductService
 from flask_jwt_extended import jwt_required, get_jwt_identity
+
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 class ProductController:
     @staticmethod
@@ -8,14 +18,19 @@ class ProductController:
     def register_product():
         seller_id = get_jwt_identity()
         
-        data = request.get_json()
-        name = data.get('nome')
-        price = data.get('preco')
-        quantity = data.get('quantidade')
-        image = data.get('imagem')
+        # 1. Pegar dados do formulário
+        name = request.form.get('nome')
+        price = request.form.get('preco')
+        quantity = request.form.get('quantidade')
 
-        if not all([name, price is not None, quantity is not None, image]):
+        # 2. Processar arquivo
+        file = request.files.get('imagem')
+
+        if not all([name, price is not None, quantity is not None, file]):
             return make_response(jsonify({"erro": "Todos os campos são obrigatórios: nome, preco, quantidade, imagem"}), 400)
+
+        if not allowed_file(file.filename):
+            return make_response(jsonify({"erro": "Extensão de arquivo não permitida. Use: png, jpg, jpeg, webp"}), 400)
 
         try:
             price = float(price)
@@ -25,11 +40,22 @@ class ProductController:
         except (ValueError, TypeError):
             return make_response(jsonify({"erro": "O preço deve ser um número positivo e a quantidade um número não-negativo."}), 400)
 
-        product = ProductService.create_product(name, price, quantity, image, seller_id)
+        # Salvar o arquivo
+        filename = f"{uuid4()}_{secure_filename(file.filename)}"
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
+            
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        file.save(file_path)
+        
+        # Gerar URL (usando host_url para ser dinâmico)
+        image_url = f"{request.host_url}static/uploads/{filename}"
+
+        product = ProductService.create_product(name, price, quantity, image_url, seller_id)
         return make_response(jsonify({
             "mensagem": "Product salvo com sucesso",
             "Product": product.to_dict()
-        }), 200)
+        }), 201)
 
     @staticmethod
     @jwt_required()
