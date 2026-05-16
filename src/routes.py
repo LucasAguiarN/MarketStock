@@ -46,10 +46,10 @@ def init_routes(app):
         return ProductController.list_products()
 
     @app.route('/api/products/<int:product_id>', methods=['GET'])
-    def show_product(product_id): # Renomeado para corresponder ao método do controlador
+    def show_product(product_id):
         return ProductController.show_product(product_id)
 
-    @app.route('/api/products/<int:product_id>/inactivate', methods=['PATCH']) # Alterado para PATCH conforme README
+    @app.route('/api/products/<int:product_id>/inactivate', methods=['PATCH'])
     def deactivate_product(product_id):
         return ProductController.deactivate_product(product_id)
 

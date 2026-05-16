@@ -23,7 +23,6 @@ def process_image_upload(file):
     file_path = os.path.join(UPLOAD_FOLDER, filename)
     file.save(file_path)
     
-    # Gerar URL (usando host_url para ser dinâmico)
     return f"{request.host_url}static/uploads/{filename}"
 
 class ProductController:
@@ -32,12 +31,11 @@ class ProductController:
     def register_product():
         seller_id = get_jwt_identity()
         
-        # 1. Pegar dados do formulário
+    
         name = request.form.get('nome')
         price = request.form.get('preco')
         quantity = request.form.get('quantidade')
 
-        # 2. Processar arquivo
         file = request.files.get('imagem')
 
         if not all([name, price is not None, quantity is not None, file]):
@@ -66,7 +64,6 @@ class ProductController:
     def update_product(product_id):
         seller_id = get_jwt_identity()
 
-        # Se for multipart/form-data (comum em edição com imagem)
         if request.content_type and request.content_type.startswith('multipart/form-data'):
             data = request.form.to_dict()
             image_file = request.files.get('imagem')
@@ -77,13 +74,11 @@ class ProductController:
                 else:
                     return make_response(jsonify({"erro": "Falha ao processar upload da imagem. Verifique a extensão (png, jpg, jpeg, webp)."}), 400)
         else:
-            # Queda para JSON caso não haja arquivo
             data = request.get_json()
 
         if not data:
             return make_response(jsonify({"erro": "Dados para atualização não fornecidos"}), 400)
         
-        # Cast types and validate if they exist in data
         try:
             if 'preco' in data:
                 data['preco'] = float(data['preco'])
