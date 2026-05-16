@@ -75,7 +75,7 @@ paths:
                   type: string
                   example: "5511999999999"
       responses:
-        '200':
+        '201':
           description: Seller cadastrado com sucesso
           content:
             application/json:
@@ -259,8 +259,8 @@ paths:
                       status:
                         type: string
                         example: "ativo"
-        '400':
-          description: Dados ausentes ou código inválido
+        '404':
+          description: Celular não encontrado
           content:
             application/json:
               schema:
@@ -268,7 +268,17 @@ paths:
                 properties:
                   erro:
                     type: string
-                    example: "celular e/ou código são obrigatórios"
+                    example: "Celular não encontrado"
+        '422':
+          description: Código Inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Código Inválido"
 
   /api/sellers/me:
     put:
@@ -327,7 +337,7 @@ paths:
                         type: string
                         example: "ativo"
         '400':
-          description: Dados não fornecidos ou seller não encontrado
+          description: Dados não fornecidos
           content:
             application/json:
               schema:
@@ -346,6 +356,16 @@ paths:
                   msg:
                     type: string
                     example: "Missing Authorization Header"
+        '404':
+          description: Seller não encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erro:
+                    type: string
+                    example: "Seller não encontrado"
   
   /api/products:
     post:

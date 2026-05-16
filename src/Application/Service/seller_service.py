@@ -54,7 +54,8 @@ class SellerService:
 
         if not seller:
             print(f"Erro: Seller com celular {cellphone} não encontrado.")
-            return None
+            return "celular não encontrado"
+        
         if str(seller.activation_code) == str(code):
             seller.status = 'ativo'
             seller.activation_code = None            
@@ -71,7 +72,7 @@ class SellerService:
             )
 
         print(f"Erro: Código {code} não confere com o salvo ({seller.activation_code})")
-        return None
+        return "código inválido"
 
     @staticmethod
     def update_seller(seller_id, data):

@@ -25,7 +25,7 @@ class SellerController:
         return make_response(jsonify({
             "mensagem": "Seller salvo com sucesso",
             "Seller": seller.to_dict()
-        }), 200)
+        }), 201)
 
     @staticmethod
     def activate_seller():
@@ -37,12 +37,15 @@ class SellerController:
             return make_response(jsonify({"erro": "celular e/ou código são obrigatórios"}), 400)
 
         activated_seller = SellerService.active_seller(cellphone, code)
-        if activated_seller:
+        if not isinstance(activated_seller, str):
             return make_response(jsonify({
                 "mensagem": "conta ativada com sucesso!",
                 "seller": activated_seller.to_dict()
             }), 200)
-        return make_response(jsonify({"erro": "código inválido ou celular não encontrado"}), 400)
+        elif activated_seller == "código inválido":
+            return make_response(jsonify({"erro": "Código Inválido"}), 422)
+        else:
+            return make_response(jsonify({"erro": "celular não encontrado"}), 404)
 
     @staticmethod
     def login_seller():
@@ -80,7 +83,7 @@ class SellerController:
 
         update_seller = SellerService.update_seller(current_id, data)
         if not update_seller:
-            return make_response(jsonify({"erro": "não foi possível atualizar os dados"}), 400)
+            return make_response(jsonify({"erro": "Seller não encontrado"}), 404)
         return make_response(jsonify({
             "mensagem": "perfil atualizado!",
             "seller": update_seller.to_dict()
