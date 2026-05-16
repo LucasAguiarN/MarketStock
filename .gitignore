@@ -21,6 +21,7 @@ env/
 
 # Ignorar a pasta de dados do MySQL
 .db/
+*.db
 
 # Garantir que o cache do python suma
 __pycache__/

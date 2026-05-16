@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from src.config.data_base import init_db
@@ -13,7 +14,9 @@ def create_app():
 
     CORS(app)
 
-    app.config["JWT_SECRET_KEY"] = "super-secret-key"
+    app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+    if not app.config["JWT_SECRET_KEY"]:
+        raise ValueError("JWT_SECRET_KEY não definida no .env")
 
     JWTManager(app)
 
