@@ -27,3 +27,10 @@ class SaleController:
             "mensagem": "Venda registrada com sucesso!",
             "venda": result["data"].to_dict()
         }), result["status"])
+
+    @staticmethod
+    @jwt_required()
+    def list_sales():
+        seller_id = get_jwt_identity()
+        sales = SaleService.get_all_by_seller(seller_id) 
+        return make_response(jsonify(sales), 200)

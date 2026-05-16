@@ -57,6 +57,10 @@ def init_routes(app):
     @app.route('/api/sales', methods=['POST'])
     def register_sale():
         return SaleController.register_sale()
+    
+    @app.route('/api/sale', methods=['GET'])
+    def list_sales():
+        return SaleController.list_sales()
 
     # ROTAS DE RELATÓRIOS
     @app.route('/api/reports/sales-summary', methods=['GET'])
