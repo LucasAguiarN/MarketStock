@@ -65,7 +65,7 @@ class SellerController:
         if seller == "inativo":
             return make_response(jsonify({"erro": "Seller ainda não ativado"}), 403)
 
-        token = create_access_token(identity=seller.id)
+        token = create_access_token(identity=str(seller.id))
 
         return make_response(jsonify({
             "mensagem": "Login realizado com sucesso",

@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager
 from src.config.data_base import init_db
 from src.routes import init_routes
@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint 
 
-load_dotenv
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
