@@ -8,3 +8,4 @@ bcrypt
 twilio
 python-dotenv
 flask-swagger-ui
+pytest
