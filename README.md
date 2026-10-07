@@ -6,6 +6,8 @@
     <img src="https://img.shields.io/badge/Status-Concluído-brightgreen" alt="Status = Concluído">
     <img src="https://img.shields.io/badge/Documentação-Completa-brightgreen" alt="Documentação: Completa">
     <img src="https://img.shields.io/badge/License-MIT-blue" alt="License = MIT">
+    <a href="./README.md" target="_blank"><img title="PT-BR" src="https://img.shields.io/badge/docs-pt--BR-blue" alt="README PT-BR"></a>
+    <a href="./README.en.md" target="_blank"><img title="EN-US" src="https://img.shields.io/badge/docs-en--US-blue" alt="README EN-US"></a>
 </p>
 
 <br>
